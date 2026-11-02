@@ -8,6 +8,7 @@
 <title>一鍋一味｜商品宣傳照工作室</title>
 <style>
 :root{--cream:#f7f2e8;--paper:#fffdf8;--sand:#eee5d7;--rust:#a45a3d;--green:#53694b;--gold:#d6aa62;--ink:#3e3028;--muted:#78695c;--line:#e4d8c7;--shadow:0 18px 50px #3e302814}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}.top{padding:24px 0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:.1em;font-family:"Noto Serif TC","Microsoft JhengHei",serif;font-size:1.15rem}.brand-mark{display:inline-grid;place-items:center;width:34px;height:34px;background:var(--rust);color:#fff;border-radius:50%;margin-right:9px}.badge{font-size:.75rem;font-weight:750;color:var(--rust);background:#a45a3d12;padding:6px 11px;border-radius:99px}.intro{padding:35px 0 24px}.intro small{color:var(--rust);font-weight:800;letter-spacing:.16em}.intro h1{font:750 clamp(1.7rem,3.5vw,2.45rem)/1.3 "Noto Serif TC","Microsoft JhengHei",serif;margin:8px 0}.intro p{margin:0;color:var(--muted);max-width:780px}.layout{display:grid;grid-template-columns:350px minmax(0,1fr);gap:24px;align-items:start;padding-bottom:40px}.panel,.preview-wrap{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.panel{padding:22px;position:sticky;top:14px}.panel h2{font:700 1.15rem "Noto Serif TC","Microsoft JhengHei",serif;margin:0 0 15px}.field{margin:0 0 16px}.field label{display:block;font-size:.83rem;font-weight:750;margin-bottom:6px}.field input[type=text],.field select{width:100%;border:1px solid var(--line);background:#fff;padding:10px 11px;border-radius:9px;color:var(--ink);font:inherit}.field input[type=file]{width:100%;font-size:.82rem}.field input[type=range]{width:100%;accent-color:var(--rust)}.row{display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem}.btn{width:100%;border:0;border-radius:11px;padding:13px 15px;font:750 .95rem inherit;cursor:pointer}.primary{background:var(--rust);color:#fff}.primary:hover{background:#85442e}.hint{font-size:.75rem;color:var(--muted);margin:12px 0 0}.disclose{font-size:.74rem;background:#f3eee5;border-radius:10px;padding:11px 12px;color:#6b6055;margin-top:18px}.preview-wrap{padding:20px}.preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.preview-head h2{font:700 1.05rem "Noto Serif TC","Microsoft JhengHei",serif;margin:0}.preview-head span{font-size:.75rem;color:var(--muted)}canvas{width:100%;height:auto;display:block;border-radius:14px;background:#efe5d6}.preview-note{color:var(--muted);font-size:.76rem;margin:12px 1px 0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0 0}.step{background:#f7f2e8;border-radius:10px;padding:10px;font-size:.75rem;color:#65584d}.step b{display:block;color:var(--rust);font-size:.7rem;margin-bottom:3px}.foot{padding:18px 0 28px;border-top:1px solid var(--line);color:var(--muted);font-size:.76rem}.foot strong{color:var(--ink)}@media(max-width:850px){.layout{grid-template-columns:1fr}.panel{position:static}.preview-wrap{order:-1}}@media(max-width:540px){.wrap{width:min(100% - 22px,680px)}.top{padding:17px 0}.intro{padding:26px 0 18px}.panel,.preview-wrap{padding:16px;border-radius:15px}.steps{grid-template-columns:1fr}.badge{font-size:.68rem}}
+button{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}.secondary{background:var(--green);color:#fff;margin:2px 0 8px}.secondary:disabled{opacity:.65;cursor:wait}.status{min-height:1.5em;color:var(--green);font-size:.78rem;font-weight:700;margin:6px 0}
 </style>
 </head>
 <body>
@@ -18,6 +19,9 @@
     <aside class="panel">
       <h2>快速製作</h2>
       <div class="field"><label for="photo">① 上傳商品照片</label><input id="photo" type="file" accept="image/*"></div>
+      <button class="btn secondary" id="removeBg" type="button">AI 去背＋品牌情境合成</button>
+      <button class="btn" id="autoEnhance" type="button" style="background:#eee5d7;color:#3e3028">一鍵自動調色</button>
+      <p class="status" id="aiStatus" aria-live="polite">上傳照片後可試 AI 去背；首次會下載約 46 MB 模型。</p>
       <div class="field"><label for="style">② 選擇品牌氛圍</label><select id="style"><option value="warm">暖色手作｜米白・陶土</option><option value="green">自然清新｜葉綠・奶油</option><option value="festive">節慶分享｜朱紅・金色</option></select></div>
       <div class="field"><label for="product">③ 商品名稱</label><input id="product" type="text" maxlength="24" value="港式蘿蔔糕"></div>
       <div class="field"><label for="tagline">宣傳短句</label><input id="tagline" type="text" maxlength="34" value="蘿蔔清甜與米香交織，簡單煎香就很滿足"></div>
@@ -25,7 +29,7 @@
       <div class="field"><label for="warmth">色彩濃度 <span class="row"><span>自然</span><span id="satVal">100%</span></span></label><input id="sat" type="range" min="70" max="135" value="100"></div>
       <button class="btn primary" id="download">下載宣傳圖 PNG</button>
       <p class="hint">支援手機拍攝的 JPG、PNG 圖片。照片只在目前瀏覽器處理，不會上傳到伺服器。</p>
-      <div class="disclose"><strong>展示版說明：</strong>目前提供色調調整與品牌版型合成；AI 去背、生成場景與自動修圖尚未串接。</div>
+      <div class="disclose"><strong>功能說明：</strong>AI 去背於瀏覽器本機執行；場景為品牌版型合成，自動調色為影像演算，未使用生成式場景 API。照片不會上傳至處理伺服器。</div>
     </aside>
     <section class="preview-wrap">
       <div class="preview-head"><h2>宣傳圖預覽</h2><span>正方形版型・適合社群貼文</span></div>
@@ -35,15 +39,29 @@
     </section>
   </section>
 </main>
-<footer class="wrap foot"><strong>一鍋一味｜慢火手作好味道</strong>　商品資訊與文案發布前，請依實際內容確認。</footer>
+<footer class="wrap foot"><strong>一鍋一味｜慢火手作好味道</strong>　去背模型：<a href="https://huggingface.co/Ko033/isnet-general-use-onnx" target="_blank" rel="noreferrer">ISNet General Use（Apache-2.0）</a>。</footer>
 <script>
 (() => {
   const canvas=document.getElementById('art'),ctx=canvas.getContext('2d'),photo=document.getElementById('photo');
   const style=document.getElementById('style'),product=document.getElementById('product'),tagline=document.getElementById('tagline'),light=document.getElementById('light'),sat=document.getElementById('sat');
-  let image=null;
+  const removeBtn=document.getElementById('removeBg'),status=document.getElementById('aiStatus');
+  let image=null,originalFile=null,subjectImage=null,segmenterPromise=null;
   const themes={warm:{bg:'#f4ebdc',panel:'#fffaf3',accent:'#a45a3d',green:'#657558',gold:'#d7b56d',ink:'#3e3028',soft:'#e7d8c3'},green:{bg:'#e9ecdf',panel:'#fffdf7',accent:'#687951',green:'#405b47',gold:'#c4a45f',ink:'#354037',soft:'#d8dfcf'},festive:{bg:'#f2e3d7',panel:'#fff8eb',accent:'#9d4435',green:'#6b6944',gold:'#d8ae5a',ink:'#422b25',soft:'#e9d4bf'}};
   function roundRect(x,y,w,h,r,fill){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill()}
   function fit(img,x,y,w,h){const scale=Math.min(w/img.width,h/img.height),iw=img.width*scale,ih=img.height*scale;ctx.drawImage(img,x+(w-iw)/2,y+(h-ih)/2,iw,ih)}
+  function drawScene(x,y,w,h,t){
+    const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,t.soft);g.addColorStop(1,t.bg);ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
+    if(style.value==='warm'){
+      ctx.fillStyle='#cbb18d45';ctx.fillRect(x,y+h*.76,w,h*.24);ctx.strokeStyle='#aa8b6750';ctx.lineWidth=3;
+      for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(x,y+h*.79+i*13);ctx.bezierCurveTo(x+w*.25,y+h*.75+i*14,x+w*.7,y+h*.84+i*12,x+w,y+h*.78+i*14);ctx.stroke()}
+    }else if(style.value==='green'){
+      ctx.fillStyle='#6f805a24';for(let i=0;i<5;i++){ctx.beginPath();ctx.ellipse(x+55+i*45,y+45+(i%2)*18,42,14,-.55,0,Math.PI*2);ctx.fill()}
+      ctx.fillStyle='#53694b24';ctx.fillRect(x,y+h*.82,w,h*.18);
+    }else{
+      ctx.fillStyle='#9d443518';ctx.fillRect(x,y+h*.76,w,h*.24);ctx.fillStyle='#d8ae5a90';
+      for(let i=0;i<18;i++){const px=x+24+(i*67)%w,py=y+22+(i*37)%(h*.65);ctx.beginPath();ctx.arc(px,py,3+(i%3),0,Math.PI*2);ctx.fill()}
+    }
+  }
   function draw(){
     const t=themes[style.value];ctx.clearRect(0,0,1080,1080);ctx.fillStyle=t.bg;ctx.fillRect(0,0,1080,1080);
     const halo=ctx.createRadialGradient(830,170,10,830,170,470);halo.addColorStop(0,t.soft);halo.addColorStop(1,t.bg);ctx.fillStyle=halo;ctx.beginPath();ctx.arc(830,170,470,0,Math.PI*2);ctx.fill();
@@ -51,7 +69,11 @@
     ctx.textAlign='left';ctx.fillStyle=t.ink;ctx.font='bold 28px sans-serif';ctx.fillText('一鍋一味',145,109);ctx.fillStyle=t.green;ctx.font='20px sans-serif';ctx.fillText('SLOW MADE · GOOD TASTE',145,140);
     roundRect(72,190,936,590,30,t.panel);
     ctx.save();ctx.shadowColor='#3e302826';ctx.shadowBlur=25;ctx.shadowOffsetY=12;roundRect(102,220,876,530,22,'#fff');ctx.restore();
-    if(image){ctx.save();ctx.filter=`brightness(${light.value}%) saturate(${sat.value}%)`;fit(image,124,242,832,486);ctx.restore()}
+    if(subjectImage){
+      ctx.save();ctx.beginPath();ctx.roundRect(102,220,876,530,22);ctx.clip();drawScene(102,220,876,530,t);
+      ctx.filter=`brightness(${light.value}%) saturate(${sat.value}%)`;ctx.shadowColor='#33251955';ctx.shadowBlur=28;ctx.shadowOffsetY=18;fit(subjectImage,176,238,728,492);ctx.restore();
+      ctx.fillStyle=t.accent;ctx.font='bold 15px sans-serif';ctx.textAlign='right';ctx.fillText('AI 去背・品牌場景合成',955,730);ctx.textAlign='left';
+    }else if(image){ctx.save();ctx.filter=`brightness(${light.value}%) saturate(${sat.value}%)`;fit(image,124,242,832,486);ctx.restore()}
     else{
       const cx=540,cy=480;ctx.fillStyle='#f2eee5';ctx.beginPath();ctx.ellipse(cx,cy,290,190,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#e2d7c6';ctx.lineWidth=10;ctx.beginPath();ctx.ellipse(cx,cy,265,166,0,0,Math.PI*2);ctx.stroke();
       ctx.save();ctx.translate(cx,cy);ctx.rotate(-.06);roundRect(-150,-70,300,145,22,'#e1c27f');ctx.strokeStyle='#c99c53';ctx.lineWidth=4;ctx.strokeRect(-137,-57,274,119);ctx.fillStyle='#b67542';ctx.fillRect(-130,37,260,9);ctx.fillStyle='#fff4d4';ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText('上傳你的商品照片',0,112);ctx.restore();
@@ -63,7 +85,28 @@
     ctx.strokeStyle=t.gold;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(82,986);ctx.lineTo(998,986);ctx.stroke();
     ctx.fillStyle=t.green;ctx.font='bold 20px sans-serif';ctx.fillText('慢火手作好味道',82,1031);ctx.textAlign='right';ctx.fillStyle=t.accent;ctx.font='18px sans-serif';ctx.fillText('一鍋一味',998,1031);
   }
-  photo.addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{image=img;draw();URL.revokeObjectURL(url)};img.src=url});
+  photo.addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;originalFile=f;subjectImage=null;const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{image=img;draw();URL.revokeObjectURL(url);status.textContent='照片已載入。可執行本機 AI 去背，或直接調色與套版。'};img.src=url});
+  removeBtn.addEventListener('click',async()=>{
+    if(!originalFile){status.textContent='請先上傳一張商品照片。';return}
+    removeBtn.disabled=true;status.textContent='載入 AI 去背模型中，首次使用會下載模型與運算元件，請保持網路連線…';
+    try{
+      if(!segmenterPromise){segmenterPromise=(async()=>{const {pipeline}=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');return pipeline('background-removal','Ko033/isnet-general-use-onnx',{dtype:'q8'})})();}
+      const segmenter=await segmenterPromise;status.textContent='AI 正在辨識商品並移除背景…';
+      const inputURL=URL.createObjectURL(originalFile);let output;
+      try{output=await segmenter([inputURL])}finally{URL.revokeObjectURL(inputURL)}
+      const result=Array.isArray(output)?output[0]:output;const blob=await result.toBlob();const resultURL=URL.createObjectURL(blob),cutout=new Image();
+      cutout.onload=()=>{subjectImage=cutout;draw();URL.revokeObjectURL(resultURL);status.textContent='AI 去背完成！已合成所選品牌情境，可再調色並下載 PNG。'};
+      cutout.onerror=()=>{URL.revokeObjectURL(resultURL);status.textContent='無法讀取去背結果，請換一張商品主體清楚的照片。'};cutout.src=resultURL;
+    }catch(err){segmenterPromise=null;console.error(err);status.textContent='模型載入或去背失敗。請確認網路可連線，或換用主體更清楚的照片。'}
+    finally{removeBtn.disabled=false}
+  });
+  document.getElementById('autoEnhance').addEventListener('click',()=>{
+    if(!image){status.textContent='請先上傳一張商品照片。';return}
+    const sample=document.createElement('canvas');sample.width=64;sample.height=64;const sctx=sample.getContext('2d',{willReadFrequently:true});sctx.drawImage(image,0,0,64,64);const data=sctx.getImageData(0,0,64,64).data;let lum=0,chroma=0,count=0;
+    for(let i=0;i<data.length;i+=4){lum+=.2126*data[i]+.7152*data[i+1]+.0722*data[i+2];chroma+=Math.max(data[i],data[i+1],data[i+2])-Math.min(data[i],data[i+1],data[i+2]);count++}
+    const avg=lum/count,color=chroma/count;light.value=Math.max(90,Math.min(118,Math.round(108+(128-avg)*.18)));sat.value=Math.max(90,Math.min(118,Math.round(106+(46-color)*.22)));
+    document.getElementById('lightVal').textContent=light.value+'%';document.getElementById('satVal').textContent=sat.value+'%';draw();status.textContent='已依照片平均明暗與色彩，自動調整亮度和濃度。';
+  });
   [style,product,tagline,light,sat].forEach(el=>el.addEventListener('input',draw));
   light.addEventListener('input',()=>document.getElementById('lightVal').textContent=light.value+'%');
   sat.addEventListener('input',()=>document.getElementById('satVal').textContent=sat.value+'%');
