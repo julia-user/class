@@ -90,14 +90,14 @@ button{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}.secondary{bac
     if(!originalFile){status.textContent='請先上傳一張商品照片。';return}
     removeBtn.disabled=true;status.textContent='載入 AI 去背模型中，首次使用會下載模型與運算元件，請保持網路連線…';
     try{
-      if(!segmenterPromise){segmenterPromise=(async()=>{const {pipeline}=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');return pipeline('background-removal','Ko033/isnet-general-use-onnx',{dtype:'q8'})})();}
+      if(!segmenterPromise){segmenterPromise=(async()=>{const {pipeline}=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');return pipeline('background-removal','Ko033/isnet-general-use-onnx',{dtype:'q8',progress_callback:info=>{if(info?.file){const pct=info.progress?` ${Math.round(info.progress)}%`:'';status.textContent=`載入 AI 模型：${info.file.split('/').pop()}${pct}`;console.log('[photo AI model]',info)}}})})();}
       const segmenter=await segmenterPromise;status.textContent='AI 正在辨識商品並移除背景…';
       const inputURL=URL.createObjectURL(originalFile);let output;
       try{output=await segmenter([inputURL])}finally{URL.revokeObjectURL(inputURL)}
       const result=Array.isArray(output)?output[0]:output;const blob=await result.toBlob();const resultURL=URL.createObjectURL(blob),cutout=new Image();
       cutout.onload=()=>{subjectImage=cutout;draw();URL.revokeObjectURL(resultURL);status.textContent='AI 去背完成！已合成所選品牌情境，可再調色並下載 PNG。'};
       cutout.onerror=()=>{URL.revokeObjectURL(resultURL);status.textContent='無法讀取去背結果，請換一張商品主體清楚的照片。'};cutout.src=resultURL;
-    }catch(err){segmenterPromise=null;console.error(err);status.textContent='模型載入或去背失敗。請確認網路可連線，或換用主體更清楚的照片。'}
+    }catch(err){segmenterPromise=null;console.error(err);status.textContent=`模型載入失敗（${err.message||'網路錯誤'}）。請確認連線後再試。`}
     finally{removeBtn.disabled=false}
   });
   document.getElementById('autoEnhance').addEventListener('click',()=>{
