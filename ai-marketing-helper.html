@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#354f40">
+  <title>一人公司 AI 行銷小幫手｜互動展示原型</title>
+  <style>
+    :root{--cream:#f7f1e7;--paper:#fffdf8;--ink:#26332d;--green:#354f40;--green2:#60765e;--rust:#b76848;--gold:#d6aa62;--muted:#6e746b;--line:#ddd4c6;--shadow:0 18px 45px #26332d12}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:1.6}
+    .shell{max-width:1320px;margin:auto;padding:28px 34px 46px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}.brand{font-weight:800;letter-spacing:.08em;color:var(--green)}.prototype{font-size:13px;color:#765b34;background:#f4e5c6;border-radius:99px;padding:7px 13px;white-space:nowrap}
+    h1{font-size:clamp(28px,4vw,42px);line-height:1.2;margin:0 0 10px;letter-spacing:.01em}.intro{font-size:17px;color:var(--muted);margin:0 0 25px}.flow{display:flex;align-items:center;gap:10px;color:var(--green);font-weight:700;margin-bottom:26px;font-size:14px}.flow span{background:#e7e0d2;padding:6px 12px;border-radius:99px}.flow b{color:var(--gold);font-size:19px}
+    .layout{display:grid;grid-template-columns:minmax(310px,.85fr) minmax(0,1.5fr);gap:22px;align-items:start}.panel{background:var(--paper);border:1px solid #e8e0d4;border-radius:20px;box-shadow:var(--shadow);padding:24px}.panel h2{font-size:20px;margin:0 0 18px;color:var(--green)}label{font-weight:700;font-size:14px;display:block;margin:15px 0 6px}input,textarea,select{width:100%;border:1px solid var(--line);background:white;border-radius:10px;padding:12px 13px;color:var(--ink);font:inherit;font-size:15px}textarea{min-height:92px;resize:vertical}input:focus,textarea:focus,select:focus{outline:3px solid #d6aa6240;border-color:var(--gold)}.hint{font-size:12px;color:var(--muted);margin:6px 0 0}.btn{border:0;border-radius:11px;padding:13px 18px;font:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:.15s}.btn-primary{width:100%;margin-top:20px;background:var(--rust);color:white;font-weight:800}.btn-primary:hover{background:#965039;transform:translateY(-1px)}.btn-secondary{background:#e9efe8;color:var(--green);font-weight:800}.btn-secondary:hover{background:#dbe6d9}.button-row{display:flex;gap:9px;align-items:center}.output-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}.output-head h2{margin:0}.status{font-size:12px;color:var(--muted)}.cards{display:grid;grid-template-columns:1fr 1fr;gap:13px}.card{border:1px solid var(--line);border-radius:15px;padding:17px;background:#fffefa;min-height:180px}.card.wide{grid-column:1/-1}.card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.card h3{font-size:15px;color:var(--rust);margin:0}.card p{margin:7px 0 0;white-space:pre-line;font-size:14px}.copy{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:white;color:var(--green);font-size:12px;font-weight:700;cursor:pointer}.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.day{padding:11px;border-radius:10px;background:#f2ede4}.day strong{display:block;color:var(--rust);font-size:12px;margin-bottom:4px}.day span{font-size:13px}.prompt{margin-top:16px;background:#eff2ed;border-radius:13px;padding:15px}.prompt-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.prompt h3{font-size:15px;color:var(--green);margin:0}.prompt pre{white-space:pre-wrap;font:13px/1.55 inherit;color:#47544c;margin:10px 0 0}.note{margin-top:18px;padding:12px 14px;border-left:3px solid var(--gold);background:#fcf8ef;color:#71685c;font-size:12px}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.card.wide{grid-column:auto}.top{align-items:flex-start}.plan{grid-template-columns:1fr}}
+    @media(max-width:540px){.shell{padding:20px 15px 32px}.top{display:block}.prototype{display:inline-block;margin-top:10px}.flow{flex-wrap:wrap}.panel{padding:18px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top"><div class="brand">一鍋一味　／　行銷內容工作台</div><div class="prototype">互動展示原型｜尚未串接 AI 模型</div></div>
+    <h1>商品資料輸入一次，行銷內容更快、更一致</h1>
+    <p class="intro">示範一人公司如何把商品特色整理成可複用的文案與發文安排。</p>
+    <div class="flow" aria-label="操作流程"><span>商品資訊</span><b>→</b><span>內容草稿</span><b>→</b><span>一週排程</span></div>
+    <div class="layout">
+      <section class="panel" aria-labelledby="input-title">
+        <h2 id="input-title">輸入品牌與商品資料</h2>
+        <label for="brand">品牌名稱</label><input id="brand" value="一鍋一味">
+        <label for="product">商品名稱</label><input id="product" value="港式蘿蔔糕">
+        <label for="features">商品特色</label><textarea id="features">蘿蔔清甜與米香交織，加入臘腸、臘肉與香菇，蒸煎皆宜</textarea>
+        <label for="audience">主要客群</label><input id="audience" value="喜歡家常港味的家庭與忙碌上班族">
+        <label for="tone">品牌語氣</label><select id="tone"><option>溫暖、實在</option><option>輕快、有活力</option><option>精緻、有質感</option></select>
+        <button class="btn btn-primary" id="generate">整理內容與排程</button>
+        <p class="hint">修改以上資料後，按下按鈕即可更新右側示範內容。</p>
+      </section>
+      <section class="panel" aria-labelledby="output-title">
+        <div class="output-head"><h2 id="output-title">內容草稿</h2><span class="status" id="status">示範內容已準備</span></div>
+        <div class="cards">
+          <article class="card"><div class="card-top"><h3>商品介紹</h3><button class="copy" data-copy="intro">複製文案</button></div><p id="intro"></p></article>
+          <article class="card"><div class="card-top"><h3>社群貼文</h3><button class="copy" data-copy="social">複製文案</button></div><p id="social"></p></article>
+          <article class="card wide"><div class="card-top"><h3>一週發文安排</h3><button class="copy" data-copy="plan-text">複製排程</button></div><div class="plan" id="plan"></div><p id="plan-text" hidden></p></article>
+        </div>
+        <div class="prompt"><div class="prompt-top"><h3>可交給 AI 的提示詞草稿</h3><button class="btn btn-secondary" id="copy-prompt">複製提示詞</button></div><pre id="prompt"></pre></div>
+        <div class="note">展示說明：此原型用範本組合示範內容流程，未連接生成式 AI；正式使用時可將提示詞交給 AI 產生並由人確認商品資訊與語氣。</div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const $=id=>document.getElementById(id);
+    function build(){
+      const brand=$('brand').value.trim()||'品牌名稱', product=$('product').value.trim()||'商品', features=$('features').value.trim()||'用心製作的好味道', audience=$('audience').value.trim()||'喜歡好味道的顧客', tone=$('tone').value;
+      const intro=`${product}｜把熟悉的家常味，帶回餐桌。\n${features}。適合${audience}，簡單加熱，就能為日常添上一份暖心滋味。`;
+      const social=`今天想吃點熟悉又滿足的味道嗎？\n${brand}的${product}，${features}。\n蒸熱柔軟、香煎外酥內軟，為忙碌的一天準備一份簡單好吃的選擇。\n想了解商品與訂購方式，歡迎私訊詢問。`;
+      const items=[['週一｜認識商品',`介紹${product}特色`],['週三｜料理靈感','分享蒸煎或搭配方式'],['週五｜日常情境',`邀請${audience}收藏或詢問`]];
+      $('intro').textContent=intro;$('social').textContent=social;$('plan').innerHTML=items.map(x=>`<div class="day"><strong>${x[0]}</strong><span>${x[1]}</span></div>`).join('');
+      $('plan-text').textContent=items.map(x=>`${x[0]}：${x[1]}`).join('\n');
+      $('prompt').textContent=`請以「${brand}」的品牌語氣（${tone}），為「${product}」撰寫商品介紹與一則社群貼文，並規劃一週三則貼文主題。\n商品特色：${features}\n主要客群：${audience}\n請使用自然、清楚的繁體中文；不要自行捏造價格、保存期限或未提供的商品資訊。`;
+      $('status').textContent='已依照輸入資料更新示範內容';
+    }
+    $('generate').addEventListener('click',build);
+    async function copyText(text,button,successLabel,defaultLabel){try{await navigator.clipboard.writeText(text);button.textContent=successLabel;setTimeout(()=>button.textContent=defaultLabel,1400)}catch{const field=document.createElement('textarea');field.value=text;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();button.textContent='已複製';setTimeout(()=>button.textContent=defaultLabel,1400)}}
+    document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>copyText($(btn.dataset.copy).textContent,btn,'已複製','複製文案')));
+    $('copy-prompt').addEventListener('click',()=>copyText($('prompt').textContent,$('copy-prompt'),'提示詞已複製','複製提示詞'));
+    build();
+  </script>
+</body>
+</html>
+
