@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f2e8">
+<meta name="description" content="一鍋一味商品宣傳照展示工具：上傳手拍照片、調整品牌色調與文案，快速輸出宣傳圖。">
+<title>一鍋一味｜商品宣傳照工作室</title>
+<style>
+:root{--cream:#f7f2e8;--paper:#fffdf8;--sand:#eee5d7;--rust:#a45a3d;--green:#53694b;--gold:#d6aa62;--ink:#3e3028;--muted:#78695c;--line:#e4d8c7;--shadow:0 18px 50px #3e302814}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}.top{padding:24px 0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:.1em;font-family:"Noto Serif TC","Microsoft JhengHei",serif;font-size:1.15rem}.brand-mark{display:inline-grid;place-items:center;width:34px;height:34px;background:var(--rust);color:#fff;border-radius:50%;margin-right:9px}.badge{font-size:.75rem;font-weight:750;color:var(--rust);background:#a45a3d12;padding:6px 11px;border-radius:99px}.intro{padding:35px 0 24px}.intro small{color:var(--rust);font-weight:800;letter-spacing:.16em}.intro h1{font:750 clamp(1.7rem,3.5vw,2.45rem)/1.3 "Noto Serif TC","Microsoft JhengHei",serif;margin:8px 0}.intro p{margin:0;color:var(--muted);max-width:780px}.layout{display:grid;grid-template-columns:350px minmax(0,1fr);gap:24px;align-items:start;padding-bottom:40px}.panel,.preview-wrap{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.panel{padding:22px;position:sticky;top:14px}.panel h2{font:700 1.15rem "Noto Serif TC","Microsoft JhengHei",serif;margin:0 0 15px}.field{margin:0 0 16px}.field label{display:block;font-size:.83rem;font-weight:750;margin-bottom:6px}.field input[type=text],.field select{width:100%;border:1px solid var(--line);background:#fff;padding:10px 11px;border-radius:9px;color:var(--ink);font:inherit}.field input[type=file]{width:100%;font-size:.82rem}.field input[type=range]{width:100%;accent-color:var(--rust)}.row{display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem}.btn{width:100%;border:0;border-radius:11px;padding:13px 15px;font:750 .95rem inherit;cursor:pointer}.primary{background:var(--rust);color:#fff}.primary:hover{background:#85442e}.hint{font-size:.75rem;color:var(--muted);margin:12px 0 0}.disclose{font-size:.74rem;background:#f3eee5;border-radius:10px;padding:11px 12px;color:#6b6055;margin-top:18px}.preview-wrap{padding:20px}.preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.preview-head h2{font:700 1.05rem "Noto Serif TC","Microsoft JhengHei",serif;margin:0}.preview-head span{font-size:.75rem;color:var(--muted)}canvas{width:100%;height:auto;display:block;border-radius:14px;background:#efe5d6}.preview-note{color:var(--muted);font-size:.76rem;margin:12px 1px 0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0 0}.step{background:#f7f2e8;border-radius:10px;padding:10px;font-size:.75rem;color:#65584d}.step b{display:block;color:var(--rust);font-size:.7rem;margin-bottom:3px}.foot{padding:18px 0 28px;border-top:1px solid var(--line);color:var(--muted);font-size:.76rem}.foot strong{color:var(--ink)}@media(max-width:850px){.layout{grid-template-columns:1fr}.panel{position:static}.preview-wrap{order:-1}}@media(max-width:540px){.wrap{width:min(100% - 22px,680px)}.top{padding:17px 0}.intro{padding:26px 0 18px}.panel,.preview-wrap{padding:16px;border-radius:15px}.steps{grid-template-columns:1fr}.badge{font-size:.68rem}}
+</style>
+</head>
+<body>
+<header class="wrap top"><div class="brand"><span class="brand-mark">鍋</span>一鍋一味</div><span class="badge">互動展示版</span></header>
+<main class="wrap">
+  <section class="intro"><small>BRAND PHOTO STUDIO</small><h1>把手拍商品照，整理成品牌宣傳圖</h1><p>上傳一張產品照片，挑選品牌氛圍、調整色調與文字，再下載一張適合社群展示的宣傳圖。</p></section>
+  <section class="layout">
+    <aside class="panel">
+      <h2>快速製作</h2>
+      <div class="field"><label for="photo">① 上傳商品照片</label><input id="photo" type="file" accept="image/*"></div>
+      <div class="field"><label for="style">② 選擇品牌氛圍</label><select id="style"><option value="warm">暖色手作｜米白・陶土</option><option value="green">自然清新｜葉綠・奶油</option><option value="festive">節慶分享｜朱紅・金色</option></select></div>
+      <div class="field"><label for="product">③ 商品名稱</label><input id="product" type="text" maxlength="24" value="港式蘿蔔糕"></div>
+      <div class="field"><label for="tagline">宣傳短句</label><input id="tagline" type="text" maxlength="34" value="蘿蔔清甜與米香交織，簡單煎香就很滿足"></div>
+      <div class="field"><label for="light">照片亮度 <span class="row"><span>柔和</span><span id="lightVal">100%</span></span></label><input id="light" type="range" min="80" max="125" value="100"></div>
+      <div class="field"><label for="warmth">色彩濃度 <span class="row"><span>自然</span><span id="satVal">100%</span></span></label><input id="sat" type="range" min="70" max="135" value="100"></div>
+      <button class="btn primary" id="download">下載宣傳圖 PNG</button>
+      <p class="hint">支援手機拍攝的 JPG、PNG 圖片。照片只在目前瀏覽器處理，不會上傳到伺服器。</p>
+      <div class="disclose"><strong>展示版說明：</strong>目前提供色調調整與品牌版型合成；AI 去背、生成場景與自動修圖尚未串接。</div>
+    </aside>
+    <section class="preview-wrap">
+      <div class="preview-head"><h2>宣傳圖預覽</h2><span>正方形版型・適合社群貼文</span></div>
+      <canvas id="art" width="1080" height="1080" aria-label="商品宣傳圖預覽"></canvas>
+      <p class="preview-note">手拍照片保留真實商品樣貌；先用版型、色調與文案建立一致的品牌感。</p>
+      <div class="steps"><div class="step"><b>問題</b>商品照風格不一致，素材整理耗時</div><div class="step"><b>工具協助</b>快速調色、套版、放入品牌文案</div><div class="step"><b>價值</b>縮短出圖時間，維持社群視覺一致</div></div>
+    </section>
+  </section>
+</main>
+<footer class="wrap foot"><strong>一鍋一味｜慢火手作好味道</strong>　商品資訊與文案發布前，請依實際內容確認。</footer>
+<script>
+(() => {
+  const canvas=document.getElementById('art'),ctx=canvas.getContext('2d'),photo=document.getElementById('photo');
+  const style=document.getElementById('style'),product=document.getElementById('product'),tagline=document.getElementById('tagline'),light=document.getElementById('light'),sat=document.getElementById('sat');
+  let image=null;
+  const themes={warm:{bg:'#f4ebdc',panel:'#fffaf3',accent:'#a45a3d',green:'#657558',gold:'#d7b56d',ink:'#3e3028',soft:'#e7d8c3'},green:{bg:'#e9ecdf',panel:'#fffdf7',accent:'#687951',green:'#405b47',gold:'#c4a45f',ink:'#354037',soft:'#d8dfcf'},festive:{bg:'#f2e3d7',panel:'#fff8eb',accent:'#9d4435',green:'#6b6944',gold:'#d8ae5a',ink:'#422b25',soft:'#e9d4bf'}};
+  function roundRect(x,y,w,h,r,fill){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill()}
+  function fit(img,x,y,w,h){const scale=Math.min(w/img.width,h/img.height),iw=img.width*scale,ih=img.height*scale;ctx.drawImage(img,x+(w-iw)/2,y+(h-ih)/2,iw,ih)}
+  function draw(){
+    const t=themes[style.value];ctx.clearRect(0,0,1080,1080);ctx.fillStyle=t.bg;ctx.fillRect(0,0,1080,1080);
+    const halo=ctx.createRadialGradient(830,170,10,830,170,470);halo.addColorStop(0,t.soft);halo.addColorStop(1,t.bg);ctx.fillStyle=halo;ctx.beginPath();ctx.arc(830,170,470,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=t.accent;ctx.beginPath();ctx.arc(100,102,29,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 26px sans-serif';ctx.textAlign='center';ctx.fillText('鍋',100,111);
+    ctx.textAlign='left';ctx.fillStyle=t.ink;ctx.font='bold 28px sans-serif';ctx.fillText('一鍋一味',145,109);ctx.fillStyle=t.green;ctx.font='20px sans-serif';ctx.fillText('SLOW MADE · GOOD TASTE',145,140);
+    roundRect(72,190,936,590,30,t.panel);
+    ctx.save();ctx.shadowColor='#3e302826';ctx.shadowBlur=25;ctx.shadowOffsetY=12;roundRect(102,220,876,530,22,'#fff');ctx.restore();
+    if(image){ctx.save();ctx.filter=`brightness(${light.value}%) saturate(${sat.value}%)`;fit(image,124,242,832,486);ctx.restore()}
+    else{
+      const cx=540,cy=480;ctx.fillStyle='#f2eee5';ctx.beginPath();ctx.ellipse(cx,cy,290,190,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#e2d7c6';ctx.lineWidth=10;ctx.beginPath();ctx.ellipse(cx,cy,265,166,0,0,Math.PI*2);ctx.stroke();
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(-.06);roundRect(-150,-70,300,145,22,'#e1c27f');ctx.strokeStyle='#c99c53';ctx.lineWidth=4;ctx.strokeRect(-137,-57,274,119);ctx.fillStyle='#b67542';ctx.fillRect(-130,37,260,9);ctx.fillStyle='#fff4d4';ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText('上傳你的商品照片',0,112);ctx.restore();
+      ctx.fillStyle=t.green;ctx.textAlign='center';ctx.font='bold 20px sans-serif';ctx.fillText('手拍照片會顯示在這裡',540,700);
+    }
+    ctx.fillStyle=t.accent;ctx.font='bold 19px sans-serif';ctx.textAlign='left';ctx.fillText('六年手作・真材實料',82,828);
+    ctx.fillStyle=t.ink;ctx.font='bold 48px sans-serif';const name=product.value.trim()||'商品名稱';ctx.fillText(name.length>13?name.slice(0,13)+'…':name,80,901);
+    ctx.fillStyle='#675a4e';ctx.font='24px sans-serif';const copy=tagline.value.trim()||'填入一句品牌宣傳短句';ctx.fillText(copy.length>31?copy.slice(0,31)+'…':copy,82,951);
+    ctx.strokeStyle=t.gold;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(82,986);ctx.lineTo(998,986);ctx.stroke();
+    ctx.fillStyle=t.green;ctx.font='bold 20px sans-serif';ctx.fillText('慢火手作好味道',82,1031);ctx.textAlign='right';ctx.fillStyle=t.accent;ctx.font='18px sans-serif';ctx.fillText('一鍋一味',998,1031);
+  }
+  photo.addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{image=img;draw();URL.revokeObjectURL(url)};img.src=url});
+  [style,product,tagline,light,sat].forEach(el=>el.addEventListener('input',draw));
+  light.addEventListener('input',()=>document.getElementById('lightVal').textContent=light.value+'%');
+  sat.addEventListener('input',()=>document.getElementById('satVal').textContent=sat.value+'%');
+  document.getElementById('download').addEventListener('click',()=>{const a=document.createElement('a');a.download='一鍋一味_商品宣傳圖.png';a.href=canvas.toDataURL('image/png');a.click()});
+  draw();
+})();
+</script>
+</body>
+</html>
+
