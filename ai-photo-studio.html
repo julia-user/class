@@ -21,7 +21,7 @@ button{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}.secondary{bac
       <div class="field"><label for="photo">① 上傳商品照片</label><input id="photo" type="file" accept="image/*"></div>
       <button class="btn secondary" id="removeBg" type="button">AI 去背＋品牌情境合成</button>
       <button class="btn" id="autoEnhance" type="button" style="background:#eee5d7;color:#3e3028">一鍵自動調色</button>
-      <p class="status" id="aiStatus" aria-live="polite">上傳照片後可試 AI 去背；首次會下載約 46 MB 模型。</p>
+      <p class="status" id="aiStatus" aria-live="polite">上傳照片後可試 AI 去背；首次會下載約 44 MB 模型。</p>
       <div class="field"><label for="style">② 選擇品牌氛圍</label><select id="style"><option value="warm">暖色手作｜米白・陶土</option><option value="green">自然清新｜葉綠・奶油</option><option value="festive">節慶分享｜朱紅・金色</option></select></div>
       <div class="field"><label for="product">③ 商品名稱</label><input id="product" type="text" maxlength="24" value="港式蘿蔔糕"></div>
       <div class="field"><label for="tagline">宣傳短句</label><input id="tagline" type="text" maxlength="34" value="蘿蔔清甜與米香交織，簡單煎香就很滿足"></div>
@@ -39,7 +39,7 @@ button{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}.secondary{bac
     </section>
   </section>
 </main>
-<footer class="wrap foot"><strong>一鍋一味｜慢火手作好味道</strong>　去背模型：<a href="https://huggingface.co/Ko033/isnet-general-use-onnx" target="_blank" rel="noreferrer">ISNet General Use（Apache-2.0）</a>。</footer>
+<footer class="wrap foot"><strong>一鍋一味｜慢火手作好味道</strong>　去背模型：<a href="https://huggingface.co/onnx-community/ormbg-ONNX" target="_blank" rel="noreferrer">ORMBG ONNX（Apache-2.0）</a>；清楚主體、簡單背景效果較穩定。</footer>
 <script>
 (() => {
   const canvas=document.getElementById('art'),ctx=canvas.getContext('2d'),photo=document.getElementById('photo');
@@ -90,7 +90,7 @@ button{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}.secondary{bac
     if(!originalFile){status.textContent='請先上傳一張商品照片。';return}
     removeBtn.disabled=true;status.textContent='載入 AI 去背模型中，首次使用會下載模型與運算元件，請保持網路連線…';
     try{
-      if(!segmenterPromise){segmenterPromise=(async()=>{const {pipeline}=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');return pipeline('background-removal','Ko033/isnet-general-use-onnx',{dtype:'q8',progress_callback:info=>{if(info?.file){const pct=info.progress?` ${Math.round(info.progress)}%`:'';status.textContent=`載入 AI 模型：${info.file.split('/').pop()}${pct}`;console.log('[photo AI model]',info)}}})})();}
+      if(!segmenterPromise){segmenterPromise=(async()=>{const {pipeline}=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');return pipeline('background-removal','onnx-community/ormbg-ONNX',{device:'wasm',dtype:'uint8',progress_callback:info=>{if(info?.file){const pct=info.progress?` ${Math.round(info.progress)}%`:'';status.textContent=`載入 AI 模型：${info.file.split('/').pop()}${pct}`;console.log('[photo AI model]',info)}}})})();}
       const segmenter=await segmenterPromise;status.textContent='AI 正在辨識商品並移除背景…';
       const inputURL=URL.createObjectURL(originalFile);let output;
       try{output=await segmenter([inputURL])}finally{URL.revokeObjectURL(inputURL)}
